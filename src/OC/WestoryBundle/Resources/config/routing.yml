@@ -1,0 +1,105 @@
+oc_westory_homepage:
+    path:     /
+    defaults: { _controller: OCWestoryBundle:Default:index }
+
+oc_westory_homepage_index:
+    path:    /accueil
+    defaults: { _controller: OCWestoryBundle:Default:index }
+
+oc_westory_registration:
+    path:    /inscription
+    defaults: { _controller: OCWestoryBundle:Member:add }
+
+oc_westory_login:
+    path:    /login
+    defaults: { _controller: OCWestoryBundle:Security:login }
+
+oc_westory_memberArea:
+    path:    /espace-personnel/{page}
+    defaults: 
+        _controller: OCWestoryBundle:Member:viewMemberArea
+        page:    1
+    requirements:
+        page: \d*
+
+oc_westory_memberPage:
+    path: /page-membre/{member}/{page}
+    defaults:
+        _controller: OCWestoryBundle:Member:viewMemberPage
+        page:    1
+    requirements:
+        page: \d*
+
+oc_westory_forgotten_password:
+    path:    /mot-de-passe-oublie/
+    defaults: { _controller: OCWestoryBundle:Member:forgottenPassword }
+
+oc_westory_login_check:
+    path:    /login_check
+
+oc_westory_logout:
+    path:    /logout
+
+oc_westory_change_password:
+    path:    /modifier-le-mot-de-passe
+    defaults: { _controller: OCWestoryBundle:Member:changePassword }
+
+oc_westory_reset_password:
+    path:    /reinitialiser-mot-de-passe/{member}
+    defaults: { _controller: OCWestoryBundle:Member:resetPassword }
+
+oc_westory_in_progress:
+    path:    /liste-histoires-en-cours/{page}
+    defaults:
+        _controller: OCWestoryBundle:Story:viewAll
+        page:        1
+    requirements:
+        page: \d*
+
+oc_westory_view_story:
+    path:    /histoires-en-cours/{id}/{pageCom}
+    defaults:
+        _controller: OCWestoryBundle:Story:view
+        pageCom:    1
+    requirements: 
+        page: \d*
+
+oc_westory_add_story:
+    path:    /publier-une-histoire
+    defaults: { _controller: OCWestoryBundle:Story:add }
+
+oc_westory_add_post:
+    path:    /addPost/{id}
+    defaults: { _controller: OCWestoryBundle:Story:addPost }
+
+oc_westory_add_vote:
+    path:    /addVote/{post}
+    defaults: { _controller: OCWestoryBundle:Post:addVote }
+
+oc_westory_delete_post:
+    path:    /deletepost/{post}
+    defaults: { _controller: OCWestoryBundle:Post:deletePost}
+
+oc_westory_report_post:
+    path:    /reportpost/{post}
+    defaults: { _controller: OCWestoryBundle:Post:reportPost}
+
+oc_westory_delete_com:
+    path:    /deletecom/{com}
+    defaults: { _controller: OCWestoryBundle:Comment:deleteCom }
+
+oc_westory_report_com:
+    path:    /reportcom/{com}
+    defaults: { _controller: OCWestoryBundle:Comment:reportCom }
+
+oc_westory_finished_stories:
+    path:     /histoires-terminees/{page}
+    defaults:
+        _controller: OCWestoryBundle:Story:viewFinished
+        page:    1
+    requirements:
+        page: \d*
+ 
+oc_westory_autocomplete:
+    path: /autocomplete
+    defaults: { _controller: OCWestoryBundle:AjaxStory:updateData }

@@ -1,0 +1,55 @@
+{% extends "@OCWestory/layout.html.twig" %}
+
+{% block title %}Westory - Liste des histoires{% endblock %}
+
+{% block ocwestory_body %}
+
+    <div class="bodyPage">
+
+    	<h2>Histoires terminées</h2>
+	    <p>
+	    <input type="text" id="myTextField" class="form-control" placeholder="Rechercher une histoire..."/>
+	    <div id="match"></div>
+	    </p>
+
+	    {% for story in stories|sort|reverse %}
+            <div class="story">
+                <div class="storyInfo">
+                    <span class="title"><i class="fas fa-book-open"></i> <a href="{{ path('oc_westory_view_story', {'id': story.id}) }}">{{ story.title}}</a></span>
+                    <div class="date">Par <i class="fas fa-user"></i> <a href="{{ path('oc_westory_memberPage', {'member': story.author}) }}">{{ story.author|capitalize }}</a>
+                    débutée le {{ story.creationDate|localizeddate('none', 'none', null, null, 'd MMMM Y') }}</div>
+                    
+                </div>
+                <div class="chapters">
+                    <h6>Chapitres</h6>
+                    <div class="chaptersInfo">
+                        {% if story.postNumber == 1 %}
+                            <p>{{ story.postNumber }} <br> validé </p>
+                        {% else %}
+                            <p>{{ story.postNumber }} <br> validés </p>
+                        {% endif %}
+                        {% if story.postLimit - story.postNumber <= 1 %}
+                            <p>{{ story.postLimit - story.postNumber }} <br> restant </p>
+                        {% else %}
+                            <p>{{ story.postLimit - story.postNumber }} <br> restants </p>
+                        {% endif %}
+                    </div>
+                </div>
+        	</div>
+        {% else %}
+        	<div>Aucune histoire terminée.</div>
+        {% endfor %}
+
+	    <div class="text-center">
+            <ul class="pagination">
+                {% for p in range(1, pageNumber) if pageNumber > 1%}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('oc_westory_in_progress', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock %}

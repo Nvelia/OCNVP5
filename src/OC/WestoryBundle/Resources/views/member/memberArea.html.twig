@@ -1,0 +1,87 @@
+{% extends "@OCWestory/layout.html.twig" %}
+
+{% block title %}Westory - Espace Personnel{% endblock %}
+
+{% block ocwestory_body %}
+
+    {% for message in app.flashes('info') %}
+        <div class="flashbag">{{ message }}</div>
+    {% endfor %}
+
+    <div class="bodyPage">
+        <h2>Espace personnel</h2>
+        <div class="personnal">
+            {% if app.user.avatar is null %}
+        	   <a href="#" class="displayAvatarForm"><img src="{{ asset('avatar/empty-avatar.jpg') }}" alt="avatar_générique" class="avatar"/></a>
+            {% else %}
+                <a href="#" class="displayAvatarForm"><img src="{{ asset('avatar/' ~ app.user.avatar.id ~ '.' ~ app.user.avatar.url) }}" alt="{{ app.user.avatar.alt }}" class="avatar" /></a>
+            {% endif %}
+            <div id="changeAvatar">{{ form(form) }}</div>
+        	<p class="username"><strong>{{app.user.username|capitalize}}</strong> ({{ app.user.votesReceived }} votes reçus)<br/>
+        	<em>Inscrit le {{app.user.registerDate|localizeddate('none', 'none', null, null, 'd MMMM Y')}}</em>
+            <a href="{{ path('oc_westory_change_password') }}" class="passModify">(Modifier le mot de passe)</a> </p>
+        </div>
+        
+        <div>
+        	<h3>Chapitres</h3>
+            {{ form_start(formOrder) }}
+            {{ form_widget(formOrder.isValid, {'attr': {'class': 'isValid'}}) }}
+            {{ form_widget(formOrder.story) }}
+            {{ form_widget(formOrder.submit, {'attr': {'class': 'submitChapterSelect'}}) }}
+            {{ form_end(formOrder) }}
+            {% if userPosts is not empty %}
+                <div class="chapterSelected">
+                    {% for post in userPosts %}
+                        <p>{{ post.message }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="chapterSearchContent">Aucun chapitres dans l'histoire sélectionée.</p>
+            {% endif %}
+        </div>
+
+        <div>
+        	<h3>Histoires créées</h3>
+            {% if userStories is not empty %}
+                {% for story in userStories %}
+                    <div class="story">
+                        <div class="storyInfo">
+                            <span class="title"><i class="fas fa-book-open"></i> <a href="{{ path('oc_westory_view_story', {'id': story.id}) }}">{{ story.title|upper }}</a></span>
+                            <div class="date">Débutée le {{ story.creationDate|localizeddate('none', 'none', null, null, 'd MMMM Y') }}</div>
+                            
+                        </div>
+                        <div class="chapters">
+                            <h6>Chapitres</h6>
+                            <div class="chaptersInfo">
+                                {% if story.postNumber == 1 %}
+                                    <p>{{ story.postNumber }} <br> validé </p>
+                                {% else %}
+                                    <p>{{ story.postNumber }} <br> validés </p>
+                                {% endif %}
+                                {% if story.postLimit - story.postNumber <= 1 %}
+                                    <p>{{ story.postLimit - story.postNumber }} <br> restant </p>
+                                {% else %}
+                                    <p>{{ story.postLimit - story.postNumber }} <br> restants </p>
+                                {% endif %}
+                            </div>       
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucune histoire créee.</p>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <ul class="pagination">
+                {% for p in range(1, pageNumber) if pageNumber > 1%}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('oc_westory_memberArea', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

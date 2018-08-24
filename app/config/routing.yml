@@ -1,0 +1,3 @@
+oc_westory:
+    resource: "@OCWestoryBundle/Resources/config/routing.yml"
+    prefix:   /

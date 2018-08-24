@@ -1,0 +1,125 @@
+{% extends "@OCWestory/layout.html.twig" %}
+
+{% block title %}Westory - {{ story.title }}{% endblock %}
+
+{% block ocwestory_body %}
+
+	{% for message in app.flashes('info') %}
+		<div class="flashbag">{{ message }}</div>
+	{% endfor %}
+
+	<div class="bodyPage">
+	    <h2 class="titleStoryPage">{{ story.title|upper }}</h2>
+	    <a href="{{ path('oc_westory_in_progress') }}" class="previousPage">&laquo; Retourner sur la liste des histoires</a>
+	    <strong class="titlechapter">Introduction - Chapitre 1</strong>
+	    <p class="intro">
+	    	{{ story.intro }}<br/>
+	    	<em>
+	    		Ecrit par <a href="{{ path('oc_westory_memberPage', {'member': story.author}) }}">{{ story.author|capitalize }}</a>
+	    		le {{ story.creationDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}
+	    	</em>
+	    </p>
+
+	    {% for postValid in posts|sort if postValid.validated == true %}
+	    	<strong class="titlechapter">Chapitre {{postValid.chapter}} {% if postValid.chapter == story.postLimit %} - Fin{% endif %}</strong>
+	    	<div class="post">
+	    		<p>Votes reçus: {{ postValid.voteNumber }}</p>
+				<p>
+					{{ postValid.message }} <br/>
+					<em>
+						Ecrit par <a href="{{ path('oc_westory_memberPage', {'member': postValid.author}) }}">{{ postValid.author|capitalize }}</a>
+						le {{ postValid.postDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}
+					</em>
+				</p>
+	    	</div>
+	    {% endfor %}
+
+	    {% if currentPosts is not empty and story.postLimit > story.postNumber %}
+	    	<div class="block">
+	    	<button class="button left" id="prev">&#10094;</button>
+		    <div class="slideDiv">
+		    	<strong>Choisissez votre chapitre gagnant</strong>
+				{% for post in posts|sort if post.chapter == (story.postNumber + 1) %}
+		    		<div class="slide">
+						<div class="slideBlocks">
+							<div class="slideMessage">
+								{% if app.user.username is defined and app.user.username == post.author %}
+									<a href="{{ path('oc_westory_delete_post', {'post': post.id}) }}" class="delete"><i class="fas fa-trash"></i> Supprimer</a>
+								{% endif %}
+
+								{% if post.reports >= 10 %}
+									<button class="hiddenReportLink">Ce texte a été signalé de nombreuses fois et est par défaut masqué. Cliquez ici pour l'afficher.</button>
+									<p class="highReports"><button class="hiddenReportCross">(masquer)</button>{{ post.message }}</p>
+								{% else %}
+									<p>{{ post.message }}</p>
+								{% endif %}	
+								<em>Ecrit par <a href="{{ path('oc_westory_memberPage', {'member': post.author}) }}">{{ post.author }}</a> le {{ post.postDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}</em>
+								<a href="{{ path('oc_westory_report_post', {'post': post.id}) }}" class="report"><i class="fas fa-exclamation-triangle"></i> Signaler</a>
+							</div>
+							<div class="upvoteContainer">
+								<p>Votes</p>
+								<a href="{{ path('oc_westory_add_vote', {'post': post.id}) }}" class="upvote"><i class="fas fa-caret-up"></i> <br/>{{ post.voteNumber }}</a>
+							</div>
+						</div>
+		    		</div>
+		    	{% endfor %}
+		    </div>
+		    <button class="button right" id="next">&#10095;</button>
+		</div>
+		{% endif %}
+
+	    {% if app.user and story.postLimit > story.postNumber %}
+	        <div id="addPost" class="addPostButton shiny">Participer à l'histoire</div>
+	        <div id="postForm">
+	        	{{ form_start(formAddPost) }}
+				{{ form_errors(formAddPost) }}
+				{{ form_end(formAddPost) }}
+			</div> 
+	    {% endif %}
+
+	    <h3>Commentaires</h3>
+
+		{% if app.user %}
+	        <div id="addComment" class="addPostButton shiny">Ajouter un commentaire</div>
+	        <div id="commentForm">
+	        	{{ form_start(formAddComment) }}
+				{{ form_errors(formAddComment) }}
+				{{ form_end(formAddComment) }}
+			</div> 
+	    {% endif %}
+
+	    {% for comment in comments|sort|reverse %}
+	    	<div class="comments">
+	    		<em>
+	    			Par {{ comment.author|capitalize }}
+	    			le {{ comment.commentDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}
+	    			<a href="{{ path('oc_westory_report_com', {'com': comment.id}) }}" class="reportCom"><i class="fas fa-exclamation-triangle"></i> Signaler</a>
+	    		</em>
+	    		{% if comment.report >= 10 %}
+					<button class="hiddenReportLink">Ce texte a été signalé de nombreuses fois et est par défaut masqué. Cliquez ici pour l'afficher.</button>
+					<p class="highReports"><button class="hiddenReportCross">(masquer)</button>{{ post.message }}</p>
+				{% else %}
+					<p>{{ comment.message }}</p>
+				{% endif %}
+				{% if app.user %}
+					{% if app.user.username == comment.author or app.user.username == story.author %}
+						<a href="{{ path('oc_westory_delete_com', {'com': comment.id}) }}" class="deleteCom" >&times;</a>
+					{% endif %}
+				{% endif %}
+	    	</div>
+		{% endfor %}
+
+
+
+		<div class="text-center">
+            <ul class="pagination">
+	            {% for p in range(1, pageComNumber) if pageComNumber > 1%}
+	                <li{% if p == pageCom %} class="active"{% endif %}>
+	                    <a href="{{ path('oc_westory_view_story', {'id': story.id, 'pageCom': p}) }}">{{ p }}</a>
+	                </li>
+	            {% endfor %}
+            </ul>
+        </div>
+
+	</div>
+{% endblock %}

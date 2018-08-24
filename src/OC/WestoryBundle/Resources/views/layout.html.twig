@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<nav>
+		<ul class="menu">
+			{% if app.user %}
+		        <li><a href="{{ path('oc_westory_add_story') }}" class="sideMenuLink swapColor"><span>Créer une histoire</span></a></li>
+		        {# <div class="hiddenForm">{{ form(formAddStory) }}</div> #}
+		    {% endif %}
+		    <li><a href="{{ path('oc_westory_homepage') }}" class="sideMenuLink"><span>Accueil</span></a></li>
+		    <li><a href="{{ path('oc_westory_in_progress') }}" class="sideMenuLink"><span>Histoires en cours</span></a></li>
+		    <li><a href="{{ path('oc_westory_finished_stories') }}" class="sideMenuLink"><span>Histoires terminées</span></a></li>
+		</ul>
+	</nav>
+  	{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+  	{% block ocwestory_body %}
+  	{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,48 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        OC\WestoryBundle\Entity\Members: 
+          algorithm: bcrypt
+          cost: 15
+
+    role_hierarchy:
+        ROLE_ADMIN:    [ROLE_USER]
+
+        
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+      main:
+        entity:
+          class: OC\WestoryBundle\Entity\Members
+          property: username
+
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false    
+
+        main:
+            pattern: ^/
+            anonymous: true
+            provider: main
+            form_login:
+              login_path: oc_westory_login
+              check_path: oc_westory_login_check
+            logout:
+              path: oc_westory_logout
+              target: oc_westory_homepage
+            remember_me:
+              secret:    '%secret%'
+              lifetime: 604800
+              path:    /
+            # activate different ways to authenticate
+
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            #http_basic: ~
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            #form_login: ~

@@ -1,0 +1,33 @@
+<div>
+    {% if app.user %}
+        <div class="wrapper">
+            <a href="#" id="memberLink" class="cta"><span>Bienvenue {{ app.user.username|capitalize }} !</span></a>
+        </div>
+    {% else %}
+        <div class="wrapper">
+            <a class="cta" href="{{ path('oc_westory_registration') }}"><span>Inscription</span></a>
+            <a class="cta" id="login" href="#"><span>Se connecter</span></a>
+        </div>
+            
+    {% endif %}
+</div>
+
+<form action="{{ path('oc_westory_login_check') }}" method="post" id="formLogin">
+    <label for="username">Login :</label>
+    <input type="text" id="username" name="_username" />
+    <br />
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="_password"/>
+    <br />
+    <label class="autolog">
+        Connexion automatique: <input type="checkbox" id="remember_me" name="_remember_me">
+        <span class="checkmark"></span>
+    </label> <br/>
+    <input type="submit" value="Connexion"/>
+    <a href="{{ path('oc_westory_forgotten_password') }}">Mot de passe oublié</a>
+</form>
+
+<div id="memberBlock">
+    <a href="{{ path('oc_westory_memberArea') }}">Espace Personnel</a> <br />
+    <a href="{{ path('oc_westory_logout') }}">Deconnexion</a>
+</div>

@@ -1,0 +1,79 @@
+{% extends "@OCWestory/layout.html.twig" %}
+
+{% block title %}Westory - Page de {{ memberInfo.username }} {% endblock %}
+
+{% block ocwestory_body %}
+    <div class="bodyPage">
+        <h2>Espace personnel</h2>
+        <div class="personnal">
+            {% if memberInfo.avatar is null %}
+               <img src="{{ asset('avatar/empty-avatar.jpg') }}" alt="avatar_générique" class="avatar"/>
+            {% else %}
+                <img src="{{ asset('avatar/' ~ memberInfo.avatar.id ~ '.' ~ memberInfo.avatar.url) }}" alt="{{ memberInfo.avatar.alt }}" class="avatar" />
+            {% endif %}
+            <p class="username"><strong>{{memberInfo.username|capitalize}}</strong> ({{ memberInfo.votesReceived }} votes reçus)<br/>
+            <em>Inscrit le {{memberInfo.registerDate|localizeddate('none', 'none', null, null, 'd MMMM Y')}}</em></p>
+        </div>
+
+        <div>
+            <h3>Chapitres</h3>
+            {{ form_start(formOrder) }}
+            {{ form_widget(formOrder.isValid, {'attr': {'class': 'isValid'}}) }}
+            {{ form_widget(formOrder.story) }}
+            {{ form_widget(formOrder.submit, {'attr': {'class': 'submitChapterSelect'}}) }}
+            {{ form_end(formOrder) }}
+            {% if memberPosts is not empty %}
+                <div class="chapterSelected">
+                    {% for post in memberPosts %}
+                        <p>{{ post.message }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="chapterSearchContent">Aucun chapitres dans l'histoire sélectionée.</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <h3>Histoires créées</h3>
+            {% if memberStories is not empty %}
+                {% for story in memberStories %}
+                    <div class="story">
+                        <div class="storyInfo">
+                            <span class="title"><i class="fas fa-book-open"></i> <a href="{{ path('oc_westory_view_story', {'id': story.id}) }}">{{ story.title|upper }}</a></span>
+                            <div class="date">Débutée le {{ story.creationDate|localizeddate('none', 'none', null, null, 'd MMMM Y') }}</div>
+                            
+                        </div>
+                        <div class="chapters">
+                            <h6>Chapitres</h6>
+                            <div class="chaptersInfo">
+                                {% if story.postNumber == 1 %}
+                                    <p>{{ story.postNumber }} <br> validé </p>
+                                {% else %}
+                                    <p>{{ story.postNumber }} <br> validés </p>
+                                {% endif %}
+                                {% if story.postLimit - story.postNumber <= 1 %}
+                                    <p>{{ story.postLimit - story.postNumber }} <br> restant </p>
+                                {% else %}
+                                    <p>{{ story.postLimit - story.postNumber }} <br> restants </p>
+                                {% endif %}
+                            </div>       
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucune histoire créee.</p>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <ul class="pagination">
+                {% for p in range(1, pageNumber) if pageNumber > 1%}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('oc_westory_memberPage', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

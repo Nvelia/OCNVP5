@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>{% block title %}WeStory - Ecrivons notre histoire{% endblock %}</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link href="{{ asset('css/design.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/tabletDesign.css') }}" rel="stylesheet" />  
+        <link href="{{ asset('css/mobileDesign.css') }}" rel="stylesheet" />  
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    </head>
+        
+    <body>
+        <div><a href="{{ path('oc_westory_homepage') }}" class="logo shiny"><img src="{{ asset('css/logo1.png') }}" alt="westory logo" /></a></div>
+        {% include '@OCWestory/login/login.html.twig' %}
+        
+        {% block body %}
+        {% endblock %}
+            
+        
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/javascript.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/ajax.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/slideshow.js') }}"></script>
+        <script type="text/javascript" 
+                id="cookieinfo"
+                src="//cookieinfoscript.com/js/cookieinfo.min.js"
+                data-message="Ce site utilise les cookies pour améliorer votre expérience utilisateur. En visitant ce site vous acceptez l'utilisation de ces derniers." 
+                data-fg="#FFF" 
+                data-bg="#F94C2E" 
+                data-linkmsg="Plus d'infos" 
+                data-moreinfo="https://fr.wikipedia.org/wiki/Cookie_(informatique)" 
+                data-divlinkbg="#FFF">
+        </script>
+
+
+<script>
+    var ROOT_URL = "{{ path('oc_westory_homepage')}}"; //your root URL, used in autocomplete-countries.js file
+</script>
+
+    </body>
+</html>

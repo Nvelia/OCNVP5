@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+	{% if app.user %}
+		<a href="{{ path('oc_westory_add_story') }}" class="addStory"><span>Créer une histoire</span></a>
+	{% endif %}
+
+	{% for message in app.flashes('info') %}
+		<div class="flashbag">{{ message }}</div>
+	{% endfor %}
+
+	<div class="page">
+	    <div class="top">
+	        <div class="hometext">
+	            <h1>Westory</h1>
+	            <p>
+	                Bienvenue sur WeStory! <br />
+	                Ecrivez, lisez et partagez vos histoires à plusieurs.
+	            </p>
+	        </div>
+
+	        <div class="elements">
+	            <a href="{{ path('oc_westory_homepage') }}" class="linkMenu shiny"><span><i class="fas fa-home"></i><br/>Accueil</span></a>
+	            <img src="{{ asset('css/lib.jpg') }}" alt="librairie">
+	        </div>
+	    </div>
+
+	    <div class="bottom">
+	        <div class="elements">
+	            <a href="{{ path('oc_westory_in_progress') }}" class="linkMenu shiny"><span><i class="fas fa-book-open"></i><br/>Histoires en cours</span></a>
+	            <img src="{{ asset('css/openBook.jpg') }}" alt="livre ouvert">
+	        </div>
+	                
+		    <div class="elements">
+		        <a href="{{ path('oc_westory_finished_stories') }}" class="linkMenu shiny"><span><i class="fas fa-book"></i><br/>Histoires terminées</span></a>
+		        <img src="{{ asset('css/closeBook.jpg') }}" alt="livre fermé">
+		    </div>
+
+		    <div class="elements">
+		    	<img src="{{ asset('css/build.jpg') }}" alt="en construction">
+		        <a href="" class="linkMenu shiny"><span><i class="fas fa-gavel"></i><br/>A venir</span></a>
+		    </div>
+		</div>  
+	</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "@OCWestory/layout.html.twig" %}
+
+{% block title %}Westory - Inscription{% endblock %}
+
+{% block ocwestory_body %}
+	<div class="bodyPage">
+		<h2>Inscription</h2>
+
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
