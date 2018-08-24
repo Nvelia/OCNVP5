@@ -12,17 +12,30 @@ class AjaxStoryController extends Controller
     public function updateDataAction(Request $request)
     {
         $data = $request->get('input');
-        
+        $routeName = $request->get('_route');
         $em = $this->getDoctrine()->getManager();
- 
-        $query = $em->createQuery(''
+
+        if($routeName == 'oc_westory_finished_stories'){
+            $query = $em->createQuery(''
+                    . 'SELECT s.id, s.title, s.author, s.postNumber, s.postLimit '
+                    . 'FROM OCWestoryBundle:Story s ' 
+                    . 'WHERE s.title LIKE :data '
+                    . 'HAVING s.postLimit = s.postNumber '
+                    . 'ORDER BY s.title ASC'
+                    )
+                    ->setParameter('data', $data . '%');
+            $results = $query->getResult();
+        }
+        else{
+           $query = $em->createQuery(''
                 . 'SELECT s.id, s.title, s.author, s.postNumber, s.postLimit '
                 . 'FROM OCWestoryBundle:Story s ' 
                 . 'WHERE s.title LIKE :data '
                 . 'ORDER BY s.title ASC'
                 )
-                ->setParameter('data', '%' . $data . '%');
-        $results = $query->getResult();
+                ->setParameter('data', $data . '%');
+            $results = $query->getResult();
+        }
 
         $storyRep = $this
             ->getDoctrine()
