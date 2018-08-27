@@ -14,9 +14,9 @@
 	.bodyPage{
 		background:#FFF;
 		width:90%;
-		position:absolute;
-		top:400px;
-		right:5%;
+		position:relative;
+		top:65px;
+		left:5%;
 		padding: 20px 60px 50px 60px;
 		margin-bottom:150px;
 	}
@@ -85,7 +85,7 @@
 	/* --- Logo --- */
 
 	.logo{
-		position:absolute;
+		position:relative;
 		top:0;
 		left:3%;
 		background:#F94C2E;
@@ -102,7 +102,7 @@
 		width:90%;
 		margin:auto;
 		position:relative;
-		top:250px;
+		top:150px;
 	}
 
 	.page .top{
@@ -205,28 +205,13 @@
 		text-decoration: none;
 	}
 
-	.cta span:after, .addStory span:after, .sideMenuLink span:after{
-	    content: '\00bb';
-	    position: absolute;
-	    opacity: 0;
-	    top: 0;
-	    right: -20px;
-	    transition: 0.5s;
-	    font-size:1.5em;
-	}
-
-	.cta:last-child:hover span:after{
-		opacity:1;
-		right:15px;
-	}
-
 	#formLogin{
 		width:420px;
 		border:solid 1px black;
 		transform: skewX(-15deg);
-		position:absolute;
-		top:51px;
-		right:72px;
+		position:relative;
+		top:-65px;
+		left:277px;
 		padding: 10px 45px;
 		background:#FE8B12;
 		color: #FFF;
@@ -328,8 +313,8 @@
 	}
 
 	.addStory{
-		position:absolute;
-		top:175px;
+		position:relative;
+		top:75px;
 		padding:15px 35px;
 		text-decoration: none;
 	    font-size: 1.5em;
@@ -340,11 +325,11 @@
 	}
 
 	#memberBlock{
-		width:420px;
+		width:350px;
 		transform: skewX(-15deg);
-		position:absolute;
-		top:51px;
-		right:88px;
+		position:relative;
+		top:-64px;
+		left:340px;
 		padding: 15px 45px;
 		background:#FE8B12;
 		box-shadow: 6px 6px 0 black;
@@ -357,8 +342,8 @@
 	}
 
 	.menu{
-		position:absolute;
-		top:130px;
+		position:relative;
+		top:20px;
 		width:100%;
 	}
 
@@ -496,6 +481,11 @@
 		padding:10px 25px 10px 25px;
 		margin:20px 0;
 		font-size:1.2em;
+	}
+
+	.bookPres{
+		max-height:1000px;
+		overflow: auto;
 	}
 
 	.intro:hover {

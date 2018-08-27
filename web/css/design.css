@@ -501,6 +501,11 @@
 		font-size:1.2em;
 	}
 
+	.bookPres{
+		max-height:1000px;
+		overflow: auto;
+	}
+
 	.intro:hover {
 	  	background-position: right center;
 	}

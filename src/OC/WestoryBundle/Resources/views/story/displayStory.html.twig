@@ -9,30 +9,32 @@
 	{% endfor %}
 
 	<div class="bodyPage">
-	    <h2 class="titleStoryPage">{{ story.title|upper }}</h2>
-	    <a href="{{ path('oc_westory_in_progress') }}" class="previousPage">&laquo; Retourner sur la liste des histoires</a>
-	    <strong class="titlechapter">Introduction - Chapitre 1</strong>
-	    <p class="intro">
-	    	{{ story.intro }}<br/>
-	    	<em>
-	    		Ecrit par <a href="{{ path('oc_westory_memberPage', {'member': story.author}) }}">{{ story.author|capitalize }}</a>
-	    		le {{ story.creationDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}
-	    	</em>
-	    </p>
+		<h2 class="titleStoryPage">{{ story.title|upper }}</h2>
+		<a href="{{ path('oc_westory_in_progress') }}" class="previousPage">&laquo; Retourner sur la liste des histoires</a>
+		    <div class="bookPres">
+			    <strong class="titlechapter">Introduction - Chapitre 1</strong>
+			    <p class="intro">
+			    	{{ story.intro }}<br/>
+			    	<em>
+			    		Ecrit par <a href="{{ path('oc_westory_memberPage', {'member': story.author}) }}">{{ story.author|capitalize }}</a>
+			    		le {{ story.creationDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}
+			    	</em>
+			    </p>
 
-	    {% for postValid in posts|sort if postValid.validated == true %}
-	    	<strong class="titlechapter">Chapitre {{postValid.chapter}} {% if postValid.chapter == story.postLimit %} - Fin{% endif %}</strong>
-	    	<div class="post">
-	    		<p>Votes reçus: {{ postValid.voteNumber }}</p>
-				<p>
-					{{ postValid.message }} <br/>
-					<em>
-						Ecrit par <a href="{{ path('oc_westory_memberPage', {'member': postValid.author}) }}">{{ postValid.author|capitalize }}</a>
-						le {{ postValid.postDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}
-					</em>
-				</p>
+			    {% for postValid in posts|sort if postValid.validated == true %}
+			    	<strong class="titlechapter">Chapitre {{postValid.chapter}} {% if postValid.chapter == story.postLimit %} - Fin{% endif %}</strong>
+			    	<div class="post">
+			    		<p>Votes reçus: {{ postValid.voteNumber }}</p>
+						<p>
+							{{ postValid.message }} <br/>
+							<em>
+								Ecrit par <a href="{{ path('oc_westory_memberPage', {'member': postValid.author}) }}">{{ postValid.author|capitalize }}</a>
+								le {{ postValid.postDate|localizeddate('none', 'none', null, null, 'd MMMM Y à kk:mm' ) }}
+							</em>
+						</p>
+			    	</div>
+		    	{% endfor %}
 	    	</div>
-	    {% endfor %}
 
 	    {% if currentPosts is not empty and story.postLimit > story.postNumber %}
 	    	<div class="block">

@@ -6,16 +6,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use OC\WestoryBundle\Entity\Story;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  
 class AjaxStoryController extends Controller
 {
     public function updateDataAction(Request $request)
     {
         $data = $request->get('input');
-        $routeName = $request->get('_route');
         $em = $this->getDoctrine()->getManager();
+        $referer = $request->headers->get('referer');
+        $previousRouteName = $this->generateUrl('oc_westory_finished_stories', array(), UrlGeneratorInterface::ABSOLUTE_URL);
 
-        if($routeName == 'oc_westory_finished_stories'){
+        if($referer == $previousRouteName){
             $query = $em->createQuery(''
                     . 'SELECT s.id, s.title, s.author, s.postNumber, s.postLimit '
                     . 'FROM OCWestoryBundle:Story s ' 
@@ -31,6 +33,7 @@ class AjaxStoryController extends Controller
                 . 'SELECT s.id, s.title, s.author, s.postNumber, s.postLimit '
                 . 'FROM OCWestoryBundle:Story s ' 
                 . 'WHERE s.title LIKE :data '
+                . 'HAVING s.postLimit != s.postNumber '
                 . 'ORDER BY s.title ASC'
                 )
                 ->setParameter('data', $data . '%');

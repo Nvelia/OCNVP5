@@ -16,6 +16,6 @@ class SecurityController extends Controller{
 		$authenticationUtils = $this->get('security.authentication_utils');
 
 		$request->getSession()->getFlashBag()->add('info', "Identifiant et/ou mot de passe incorrect.");
-		return $this->render('@OCWestory/Default/index.html.twig');
+		return $this->render('@OCWestory/default/index.html.twig');
 	}
 }

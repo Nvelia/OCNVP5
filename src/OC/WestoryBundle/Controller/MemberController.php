@@ -180,19 +180,20 @@ class MemberController extends Controller{
 			        ->setBody(
 			            $this->renderView(
 			                '@OCWestory/emails/resetPassword.html.twig',
-			                array(	'name' => $userValid->getUsername(),
-			            			'member'				=> $userValid)
+			                array(	'name' 		=> $userValid->getUsername(),
+			            			'member'	=> $userValid)
 			            ),
 			            'text/html'
 			        );
 
 		    	$mailer->send($message);
+		    	$request->getSession()->getFlashBag()->add('info', "Un Email de réinitialisation du mot de passe a été envoyé.");
         	}
         	else{
         		$request->getSession()->getFlashBag()->add('info', "Aucun membre correspondant.");
         	}
 
-        	$request->getSession()->getFlashBag()->add('info', "Un Email de réinitialisation du mot de passe a été envoyé.");
+        	
 			return $this->redirectToRoute('oc_westory_homepage');
         }
 

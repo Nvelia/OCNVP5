@@ -24,7 +24,7 @@ class MemberMailer extends \Twig_Extension{
             ->setTo($member->getEmailAddress())
             ->setBody(
                 $this->twig->render(
-                    'emails/registration.html.twig',
+                    '@OCWestory/emails/registration.html.twig',
                     array('name' => $member->getUsername())
                 ),
                 'text/html'

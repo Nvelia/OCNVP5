@@ -167,16 +167,6 @@
 		text-decoration: none;
 	}
 
-	.cta span:after, .addStory span:after, .sideMenuLink span:after{
-	    content: '\00bb';
-	    position: absolute;
-	    opacity: 0;
-	    top: 0;
-	    right: -20px;
-	    transition: 0.5s;
-	    font-size:1.5em;
-	}
-
 	#formLogin{
 		border:solid 1px black;
 		position:relative;
@@ -306,6 +296,11 @@
 		display:block;
 		text-transform: uppercase;
 		font-size:1em;
+	}
+
+	.bookPres{
+		max-height:800px;
+		overflow: auto;
 	}
 
 	.story .storyInfo a, .storySearch .storyInfo a{
