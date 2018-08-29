@@ -10,7 +10,7 @@
 
 	<div class="bodyPage">
 		<h2 class="titleStoryPage">{{ story.title|upper }}</h2>
-		<a href="{{ path('oc_westory_in_progress') }}" class="previousPage">&laquo; Retourner sur la liste des histoires</a>
+		<a href="{{ app.request.headers.get('referer') }}" class="previousPage">&laquo; Retourner sur la liste des histoires</a>
 		    <div class="bookPres">
 			    <strong class="titlechapter">Introduction - Chapitre 1</strong>
 			    <p class="intro">

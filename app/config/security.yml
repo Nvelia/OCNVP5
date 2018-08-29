@@ -37,7 +37,7 @@ security:
               target: oc_westory_homepage
             remember_me:
               secret:    '%secret%'
-              lifetime: 604800
+              lifetime: 604800    # 1 semaine
               path:    /
             # activate different ways to authenticate
 

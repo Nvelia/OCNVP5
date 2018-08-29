@@ -24,6 +24,7 @@ class MembersType extends AbstractType
             ))
             ->add('password',       RepeatedType::class, array(
                 'type'              => PasswordType::class,
+                'invalid_message'   => 'Les mots de passe doivent correspondre.',
                 'first_options'     => array('label' => 'Mot de passe'),
                 'second_options'    => array('label' => 'Vérification du mot de passe'),
             ))

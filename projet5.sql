@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 24 août 2018 à 11:45
+-- Généré le :  lun. 27 août 2018 à 12:23
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `ocp5_members` (
   UNIQUE KEY `UNIQ_2E0029C1465A626E` (`emailAddress`),
   UNIQUE KEY `UNIQ_2E0029C1F85E0677` (`username`),
   UNIQUE KEY `UNIQ_2E0029C186383B10` (`avatar_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `ocp5_members`
@@ -91,7 +91,9 @@ CREATE TABLE IF NOT EXISTS `ocp5_members` (
 
 INSERT INTO `ocp5_members` (`id`, `username`, `password`, `emailAddress`, `votesReceived`, `votesNumber`, `registerDate`, `avatar_id`, `salt`, `roles`) VALUES
 (12, 'Guest', '$2y$15$4GUJrjEW4C5jKKiANw8Aye7ZpOZ7D.hH2SZdYfh5p2Nvhcq4SqdEO', 'test@xyz.com', 21, 3, '2018-07-19 13:09:48', NULL, '', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
-(13, 'Guest2', '$2a$04$0BcCXv.CX9estr6MLnNZTeBT84wOn7mEHSMZ3EuuY2SwMST0Ht1Qi', 'test2@xyz.com', 15, 3, '2018-07-24 13:17:31', NULL, '', 'a:1:{i:0;s:9:\"ROLE_USER\";}');
+(13, 'Guest2', '$2a$04$0BcCXv.CX9estr6MLnNZTeBT84wOn7mEHSMZ3EuuY2SwMST0Ht1Qi', 'test2@xyz.com', 15, 3, '2018-07-24 13:17:31', NULL, '', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
+(49, 'niven', '$2y$15$ymz3USpioEHKhdVH3.hY1e7qn9ndklie1rAthmH8lCbHEN.2EkYEW', 'nivensanpo@hotmail.fr', 0, 3, '2018-08-24 14:49:46', NULL, '', 'a:1:{i:0;s:9:\"ROLE_USER\";}'),
+(53, 'guest4', '$2y$15$afFaM08ZTG7u4ba9vxSa0OYTvhDoUT4A7diVBzJu1Ie0Qo5fB.BRS', 'nivensanpo24@gmail.com', 0, 3, '2018-08-27 13:45:42', NULL, '', 'a:1:{i:0;s:9:\"ROLE_USER\";}');
 
 -- --------------------------------------------------------
 
@@ -113,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `ocp5_post` (
   `chapter` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_42E5503DAA5D4036` (`story_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `ocp5_post`
@@ -143,7 +145,11 @@ INSERT INTO `ocp5_post` (`id`, `author`, `message`, `postDate`, `postEditDate`, 
 (45, 'Guest2', 'Je repense à cet instant que je n\'ai jamais oublié. A cette curieuse leçon de vie. La peur de ce qui se trouve derrière notre épaule. De ce que l\'on ne voit pas mais que l\'on imagine avec une telle certitude que l\'intangible devient réel. Et je sens alors mes jambes augmenter leur cadence. J\'entends mon cœur, pourtant épuisé, exploser dans ma poitrine. Il y a quelque chose derrière moi. Et si ce ne sont pas des coureurs, alors qu\'est-ce que cela peut bien être ?', '2018-08-24 12:51:01', NULL, 1, 0, 13, 1, 7),
 (46, 'Guest2', 'J\'entends la foule. Leurs cris ne sont que des hurlements de terreur. Leurs mains ne font qu\'indiquer ce qui me poursuit, sans relâche. Une chose qui est sortie des bois, et m\'a pris en chasse. Pour me dévorer, pour m\'emmener dans sa tanière, et se repaître de mes os, de mes muscles meurtris. Elle sait que si je flanche, je ne pourrais redémarrer, déployer de nouveau mes ailes pour la fuir. Alors j\'accélère encore, totalement paniqué. Je cligne des yeux, tant la sueur coule sur mon visage. Je déglutis. Je suis assoiffé, mais il est trop tard pour boire, pour ne serait-ce penser à boire. \r\nJe traverse la ligne d\'arrivée.', '2018-08-24 12:52:07', NULL, 3, 0, 13, 1, 8),
 (47, 'Guest2', 'Les hurlements n\'en finissent pas de s\'élever. Me faisant presque chuter, tant ils en deviennent insupportables. La chose est dernière moi, bien réelle. Cela ne fait plus aucun doute. Je vois la foule qui s\'écarte, réalisant que si la créature me poursuit, elle peut les blesser dans sa frustration. Dans sa rage de me voir à sa portée et de ne pas pouvoir me prendre. Une rage que je connais, tant je l\'ai digérée toutes ces fois où, une petite voix, au plus profond de mon être, me susurrait d\'abandonner. Que c\'était de la folie de vouloir continuer. Mais je ne l\'ai pas écoutée. Et le monstre ne l\'écoutera pas non plus ; il courra, bondira, muscles bandés et la gueule béante, jusqu\'à ce qu\'il atteigne sa proie.', '2018-08-24 12:52:52', NULL, 1, 0, 13, 1, 9),
-(48, 'Guest2', 'La ligne d\'arrivée est loin derrière moi à présent. Mais je ne ralentis pas. Pour rien au monde je ne m\'arrêterai. Je ne suis que douleurs. Je ne suis que chair tourmentée. Ma raison ne se résume qu\'à une seule pensée : courir, encore et encore, pour vivre. Pour survivre.\r\nPour lui échapper.', '2018-08-24 13:33:54', NULL, 2, 0, 13, 1, 10);
+(48, 'Guest2', 'La ligne d\'arrivée est loin derrière moi à présent. Mais je ne ralentis pas. Pour rien au monde je ne m\'arrêterai. Je ne suis que douleurs. Je ne suis que chair tourmentée. Ma raison ne se résume qu\'à une seule pensée : courir, encore et encore, pour vivre. Pour survivre.\r\nPour lui échapper.', '2018-08-24 13:33:54', NULL, 2, 0, 13, 1, 10),
+(49, 'niven', 'Le royaume du mal \r\n\r\nLe royaume du mal n’était pas loin du pays des hommes. La reine s’appelait Haine. Elle avait plusieurs têtes qui ressemblaient à celles de serpent mais avait une gueule de rongeurs. Le cou et les yeux d’un vautour accroché à un corps faisant penser à un arbre avec des racines vivantes. Et c’en était un, un arbre d’une couleur rouge sang, sans feuille. Elle se nourrissait d’âmes. \r\nSa soeur s’appelait Zizanie. Elle avait une tête à trois faces. Une face souriante, une autre triste et une dernière en colère. Son corps ressemblait à un drap épais et large mais était constitué de chair puante avec des petits orifices partout. Ces deux soeurs étaient obligées de s’entraider mutuellement. Zizanie était très intelligente et avait le pouvoir de convaincre tout être faible ou en colère. Elle se nourrissait des sentiments de tristesse et de déception.', '2018-08-24 15:06:51', NULL, 5, 0, 15, 1, 2),
+(50, 'Guest', 'Depuis sa toute première mission, Zizanie avait progressé et était presque invincible. Les enfants d’Adam et Eve s’entretuèrent à cause d’elle il y a bien longtemps. Et elle continuait à détruire les enfants d’Adam. Tous les soirs elle pénétrait dans le royaume sous forme humaine. A chaque fois les gardes s’entretuaient sans raison apparente. Elle s’immisçait entre eux et les montait les uns contre les autres sans leur laisser une chance de se comprendre. Une fois à l’intérieur, elle commençait sa besogne par les couples mariés, des amis ou deux familles.', '2018-08-27 12:27:03', NULL, 2, 0, 15, 1, 3),
+(51, 'Guest', 'Elle se pressentait sous forme humaine d’abord et parfaitement informée de leurs problèmes, elle les retournait les uns contre les autres. Elle commençait souvent par les femmes en utilisant la jalousie. Une fois sa victime bien convaincue elle l’enveloppait avec son large corps puant et à travers les petits orifices, un message répétant sans cesse « la séparation» pénétrait dans le cerveau de la victime.', '2018-08-27 12:32:54', NULL, 0, 0, 15, 0, 4),
+(52, 'Guest', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ullamcorper metus et ipsum cursus auctor. Sed sed magna tempor, hendrerit ligula vel, sollicitudin magna. In sit amet odio feugiat, semper quam a, porttitor nisl. Donec arcu neque, maximus sit amet commodo id, blandit nec nibh. Praesent laoreet vel arcu sit amet tincidunt. Suspendisse potenti. Proin sagittis mauris a diam eleifend congue. Donec mollis augue varius leo finibus fringilla. Pellentesque pharetra aliquet diam, vitae tempus orci venenatis congue. Aliquam at velit et nisl interdum placerat a vel felis.', '2018-08-27 12:33:15', NULL, 0, 10, 15, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -162,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `ocp5_story` (
   `intro` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_202FD8882B36786B` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `ocp5_story`
@@ -170,7 +176,8 @@ CREATE TABLE IF NOT EXISTS `ocp5_story` (
 
 INSERT INTO `ocp5_story` (`id`, `title`, `author`, `creationDate`, `postNumber`, `postLimit`, `intro`) VALUES
 (12, 'Ici et Maintenant', 'Guest', '2018-08-24 12:05:59', 12, 12, 'Le réveil est difficile ce matin. J’ai la tête lourde et mes paupières se referment à chaque fois que je fais l’effort de les ouvrir. Je prends la bouteille d’eau posée sur la table de nuit et en bois quelques gorgées. C’est alors que les images d’un rêve se superposent les unes aux autres, me laissant très peu de temps pour faire la liaison entre elles. Quelques secondes où se succèdent des flashes aussi rapides que les éclats du bouquet d’un feu d’artifice. Puis, plus rien. Le vide total. Mon rêve vient juste de s’approcher de ma mémoire, par à coups, mais a fini par sombrer quelque part au fond de moi et je ne sais plus où aller le repêcher. Il est trop tard. Tant pis !\r\nRésignée, je me dirige vers la salle de bain. Je m’asperge le visage d’eau froide et savoure le bien-être que cela me procure. C’est alors que j’arrive à saisir au vol un bout de mon rêve. J’essaie de fixer les images, je ne veux plus les perdre. Mais plus j’essaie de faire émerger de moi ce qui manque, plus je m’éloigne même de ce que je venais à peine de percevoir. Dommage !'),
-(13, 'Le Chemin de Croix', 'Guest2', '2018-08-24 12:41:39', 10, 10, 'Je ne sais pas depuis combien de temps je cours. Contre le temps. Contre les autres. Contre moi-même. Enfant, je me souviens m\'être enfui, soudainement pris de panique, et avoir arrêté ma course des centaines de mètres plus loin, en réalisant que la voix qui me parvenait était celle de mon père. Il avait voulu me faire peur. Il avait réussi. \r\nAujourd\'hui, je cours encore. En quelque sorte, pour ma survie. Vous ne me connaissez pas. Je n\'ai jamais rien remporté. Je n\'ai jamais rien gagné. Pas de quoi être fier. Et pourtant, je suis là. Je ne suis que douleurs, une mécanique bien huilée qui n\'est composée que d\'une paire de jambes sans cesse en mouvement, celui d\'un balancier, et deux yeux qui fixent l\'horizon avec cet ultime but d\'aller toujours plus loin. Plus encore, je suis une voix, un écho qui m\'encourage, qui me fait croire que la victoire est au bout du chemin. Parfois, elle se fait entendre, à voix haute, dans les moments les plus difficiles ; dans les montées, quand les muscles sont sur le point de se rompre. Quand je me demande pourquoi - pour qui - je fais ce chemin de croix.');
+(13, 'Le Chemin de Croix', 'Guest2', '2018-08-24 12:41:39', 10, 10, 'Je ne sais pas depuis combien de temps je cours. Contre le temps. Contre les autres. Contre moi-même. Enfant, je me souviens m\'être enfui, soudainement pris de panique, et avoir arrêté ma course des centaines de mètres plus loin, en réalisant que la voix qui me parvenait était celle de mon père. Il avait voulu me faire peur. Il avait réussi. \r\nAujourd\'hui, je cours encore. En quelque sorte, pour ma survie. Vous ne me connaissez pas. Je n\'ai jamais rien remporté. Je n\'ai jamais rien gagné. Pas de quoi être fier. Et pourtant, je suis là. Je ne suis que douleurs, une mécanique bien huilée qui n\'est composée que d\'une paire de jambes sans cesse en mouvement, celui d\'un balancier, et deux yeux qui fixent l\'horizon avec cet ultime but d\'aller toujours plus loin. Plus encore, je suis une voix, un écho qui m\'encourage, qui me fait croire que la victoire est au bout du chemin. Parfois, elle se fait entendre, à voix haute, dans les moments les plus difficiles ; dans les montées, quand les muscles sont sur le point de se rompre. Quand je me demande pourquoi - pour qui - je fais ce chemin de croix.'),
+(15, 'Emotion', 'niven', '2018-08-24 15:06:27', 3, 15, 'Il y a très longtemps, dans un royaume appelé Sentiment les habitants étaient confrontés à un mal qu’aucun de leurs sorciers ou guérisseurs ne pouvaient guérir. Le conseil du roi ne trouvait pas des solutions. Le roi se voyait impuissant face à un tel phénomène. Pourtant il était sage et intelligent. Cependant, ce mal s’attaquait d’abord aux personnes moralement fragiles. Et la suite des événements faisait que les plus forts soient contaminés et succombassent à leur tour. Les femmes aussi n’étaient pas épargnées et souffraient de ce mal.');
 
 --
 -- Contraintes pour les tables déchargées
